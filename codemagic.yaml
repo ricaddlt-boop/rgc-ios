@@ -35,6 +35,9 @@ workflows:
       - name: Instalar CocoaPods si existe
         script: |
           if [ -f "Podfile" ]; then
+            echo "Asegurando deployment target 13.0 y CDN en Podfile..."
+            sed -i '' "s/platform :ios, .*/platform :ios, '13.0'/g" Podfile || true
+            sed -i '' "s|source 'https://github.com/CocoaPods/Specs'||g" Podfile || true
             echo "Instalando dependencias CocoaPods con hook sin firma..."
             pod install --repo-update || pod install
           else
@@ -126,6 +129,9 @@ workflows:
       - name: Instalar CocoaPods si existe
         script: |
           if [ -f "Podfile" ]; then
+            echo "Asegurando deployment target 13.0 y CDN en Podfile..."
+            sed -i '' "s/platform :ios, .*/platform :ios, '13.0'/g" Podfile || true
+            sed -i '' "s|source 'https://github.com/CocoaPods/Specs'||g" Podfile || true
             echo "Instalando dependencias CocoaPods con hook sin firma..."
             pod install --repo-update || pod install
           else
